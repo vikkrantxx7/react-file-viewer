@@ -6,8 +6,11 @@ const autoprefixer = require('autoprefixer');
 const BUILD_DIR = path.resolve(__dirname, './dist');
 const APP_DIR = path.resolve(__dirname, './src');
 
+const TerserPlugin = require('terser-webpack-plugin');
+
 const config = {
   entry: `${APP_DIR}/components`,
+  mode: 'production',
   output: {
     path: BUILD_DIR,
     filename: 'index.js',
@@ -83,6 +86,10 @@ const config = {
         },
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };
 
